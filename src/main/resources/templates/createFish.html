@@ -42,9 +42,9 @@
 						<lebel class="col-sm-4 col-form-label">Фото</lebel>
 						<div class="col-sm-8">
 							<input class="form-control" type="file" step="0.01" min="0"
-								th:field="${fishDto.imageFile}">
-							<p th:if="${#fields.hasErrors('imageFile')}"
-								th:errorclass="text-danger" th:errors="${fishDto.imageFile}"></p>
+								th:field="${fishDto.imageFiles}" multiple />
+							<p th:if="${#fields.hasErrors('imageFiles')}"
+								th:errorclass="text-danger" th:errors="${fishDto.imageFiles}"></p>
 						</div>
 					</div>
 

@@ -1,15 +1,18 @@
 package technikal.task.fishmarket.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "fish")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Fish {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -18,37 +21,11 @@ public class Fish {
 	private String name;
 	private double price;
 	private Date catchDate;
-	private String imageFileName;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public Date getCatchDate() {
-		return catchDate;
-	}
-	public void setCatchDate(Date catchDate) {
-		this.catchDate = catchDate;
-	}
-	public String getImageFileName() {
-		return imageFileName;
-	}
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
-	}
+	@OneToMany(mappedBy = "fish", cascade = CascadeType.ALL)
+	private List<ImageFile> imageFileNameList = new ArrayList<>();
 
+	public void addImageFile(ImageFile imageFile) {
+		imageFile.setFish(this);
+		imageFileNameList.add(imageFile);
+	}
 }
