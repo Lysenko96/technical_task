@@ -14,7 +14,6 @@ public interface ImageFileRepository extends JpaRepository<ImageFile, Integer> {
     List<ImageFile> findAllByFishId(int fishId);
 
     @Modifying
-//    @Transactional
     @Query("DELETE FROM ImageFile i WHERE i.id IN (:ids)")
     void deleteAllByIdIn(List<Integer> ids);
 }

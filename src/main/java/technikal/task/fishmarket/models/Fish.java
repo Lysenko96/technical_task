@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@BatchSize(size = 20)
 public class Fish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
