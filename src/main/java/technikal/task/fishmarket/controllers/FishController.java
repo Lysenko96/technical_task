@@ -33,7 +33,7 @@ public class FishController {
     public String showFishList(@AuthenticationPrincipal User user, Model model) {
         List<Fish> fishlist = fishService.findAll();
         model.addAttribute("fishlist", fishlist);
-        Role role = user.getRoles().stream().filter(r->r.equals(Role.ADMIN)).findFirst().orElse(Role.USER);
+        Role role = user.getRoles().stream().filter(r -> r.equals(Role.ADMIN)).findFirst().orElse(Role.USER);
         model.addAttribute("role", role.name());
         return "index";
     }

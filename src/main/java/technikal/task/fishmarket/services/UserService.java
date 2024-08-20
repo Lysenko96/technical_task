@@ -28,8 +28,8 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void save(User user){
-        if(user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)) {
+    public void save(User user) {
+        if (user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)) {
             user.setRoles(Collections.singleton(Role.ADMIN));
         }
 

@@ -13,6 +13,4 @@ public interface FishRepository extends JpaRepository<Fish, Integer> {
     @Override
     @Query("SELECT f FROM Fish f JOIN FETCH f.imageFileNameList l ORDER BY f.id DESC")
     List<Fish> findAll();
-
-
 }

@@ -1,12 +1,13 @@
 package technikal.task.fishmarket.models;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
 @Table(name = "fish")
@@ -14,18 +15,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fish {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-	private String name;
-	private double price;
-	private Date catchDate;
-	@OneToMany(mappedBy = "fish", cascade = CascadeType.ALL)
-	private List<ImageFile> imageFileNameList = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public void addImageFile(ImageFile imageFile) {
-		imageFile.setFish(this);
-		imageFileNameList.add(imageFile);
-	}
+    private String name;
+    private double price;
+    private Date catchDate;
+    @OneToMany(mappedBy = "fish")
+    private List<ImageFile> imageFileNameList = new ArrayList<>();
+
+    public void addImageFile(ImageFile imageFile) {
+        imageFile.setFish(this);
+        imageFileNameList.add(imageFile);
+    }
 }

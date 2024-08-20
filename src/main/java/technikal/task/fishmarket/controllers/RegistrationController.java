@@ -16,12 +16,12 @@ public class RegistrationController {
     private final UserService userService;
 
     @GetMapping
-    public String registration(){
+    public String registration() {
         return "registration";
     }
 
     @PostMapping
-    public String processUser(RegistrationForm form){
+    public String processUser(RegistrationForm form) {
         userService.save(form.getUser());
         return "redirect:/login";
     }

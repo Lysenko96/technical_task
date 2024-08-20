@@ -1,14 +1,12 @@
 package technikal.task.fishmarket.models;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -18,10 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 public class FishDto {
 
-	@NotEmpty(message = "потрібна назва рибки")
-	private String name;
-	@Min(0)
-	private double price;
-	private List<MultipartFile> imageFiles;
+    @NotEmpty(message = "потрібна назва рибки")
+    private String name;
+    @Min(0)
+    private double price;
+    private List<MultipartFile> imageFiles;
 
 }
