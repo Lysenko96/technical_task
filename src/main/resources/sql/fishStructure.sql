@@ -25,20 +25,42 @@
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 
-# DROP TABLE IF EXISTS `role`;
-# DROP TABLE IF EXISTS `user_details`;
 
-INSERT INTO `user_details`(username, password, email, phone) VALUES('admin', '$2a$12$/UYA.6N.RqfOTETvCVyuleYe1AvDfQxb/fxKs27quN2HW/CFEFive', 'adm@gmail.com', 999);
-INSERT INTO `user_details`(username, password, email, phone) VALUES('user', '$2a$12$qrkslpAnyzIV9F8w8SlVJOgk6XgSgpBDonIHRCJBsnYMLW0Kplaru', 'user@gmail.com', 111);
-INSERT INTO `role`(user_id, role_name) VALUES ((SELECT ud.id FROM `user_details` ud WHERE username = 'ADMIN'), 'ADMIN');
-INSERT INTO `role`(user_id, role_name) VALUES ((SELECT ID FROM `user_details` WHERE username = 'USER'), 'USER');
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `user_details`;
+
+CREATE TABLE IF NOT EXISTS `user_details`
+(
+    `id`       int NOT NULL AUTO_INCREMENT,
+    `username` varchar(255) DEFAULT NULL,
+    `password` varchar(255) DEFAULT NULL,
+    `email`    varchar(255) DEFAULT NULL,
+    `phone`    varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `role`
+(
+    `user_id`   int NOT NULL,
+    `role_name` varchar(255) DEFAULT NULL,
+    FOREIGN KEY (user_id) REFERENCES `user_details` (id)
+);
+
+INSERT INTO `user_details`(username, password, email, phone)
+VALUES ('admin', '$2a$12$/UYA.6N.RqfOTETvCVyuleYe1AvDfQxb/fxKs27quN2HW/CFEFive', 'adm@gmail.com', 999);
+INSERT INTO `user_details`(username, password, email, phone)
+VALUES ('user', '$2a$12$qrkslpAnyzIV9F8w8SlVJOgk6XgSgpBDonIHRCJBsnYMLW0Kplaru', 'user@gmail.com', 111);
+INSERT INTO `role`(user_id, role_name)
+VALUES ((SELECT ud.id FROM `user_details` ud WHERE username = 'ADMIN'), 'ADMIN');
+INSERT INTO `role`(user_id, role_name)
+VALUES ((SELECT ID FROM `user_details` WHERE username = 'USER'), 'USER');
 
 CREATE TABLE IF NOT EXISTS `fish`
 (
-    `id`              int    NOT NULL AUTO_INCREMENT,
-    `catch_date`      datetime(6)  DEFAULT NULL,
-    `name`            varchar(255) DEFAULT NULL,
-    `price`           double NOT NULL,
+    `id`         int    NOT NULL AUTO_INCREMENT,
+    `catch_date` datetime(6)  DEFAULT NULL,
+    `name`       varchar(255) DEFAULT NULL,
+    `price`      double NOT NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
