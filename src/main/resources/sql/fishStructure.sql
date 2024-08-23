@@ -25,6 +25,14 @@
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 
+# DROP TABLE IF EXISTS `role`;
+# DROP TABLE IF EXISTS `user_details`;
+
+INSERT INTO `user_details`(username, password, email, phone) VALUES('admin', '$2a$12$/UYA.6N.RqfOTETvCVyuleYe1AvDfQxb/fxKs27quN2HW/CFEFive', 'adm@gmail.com', 999);
+INSERT INTO `user_details`(username, password, email, phone) VALUES('user', '$2a$12$qrkslpAnyzIV9F8w8SlVJOgk6XgSgpBDonIHRCJBsnYMLW0Kplaru', 'user@gmail.com', 111);
+INSERT INTO `role`(user_id, role_name) VALUES ((SELECT ud.id FROM `user_details` ud WHERE username = 'ADMIN'), 'ADMIN');
+INSERT INTO `role`(user_id, role_name) VALUES ((SELECT ID FROM `user_details` WHERE username = 'USER'), 'USER');
+
 CREATE TABLE IF NOT EXISTS `fish`
 (
     `id`              int    NOT NULL AUTO_INCREMENT,
